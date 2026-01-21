@@ -1221,6 +1221,53 @@
             .cv-modal { max-width: 100%; height: 85vh; border-radius: 8px; }
         }
 
+        /* Additional adjustments for profile picture, cover picture, and navigation bar */
+@media (max-width: 768px) {
+    /* Hero section adjustments for profile and cover picture */
+    .hero-image {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+    }
+
+    .profile-container img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 50%;
+        margin-bottom: 15px;
+    }
+
+    /* Navigation bar adjustments */
+    header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px 0;
+    }
+
+    .nav-links {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .nav-links a {
+        font-size: 16px;
+        padding: 10px;
+        text-align: center;
+        width: 100%;
+    }
+
+    /* Ensure cover picture scales properly */
+    .hero-image img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+}
         /* Animations */
         @keyframes float {
             0% {
@@ -2200,53 +2247,12 @@ document.getElementById('download-cv').addEventListener('click', function(e) {
 
             document.querySelectorAll('.nav-links a').forEach(link => {
                 link.classList.remove('active');
-                if (link.getAttribute('href').slice(1) === current) {
+                if (link.getAttribute('href') === `#${current}`) {
                     link.classList.add('active');
                 }
             });
         });
 
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                const href = this.getAttribute('href');
-                if (href !== '#' && document.querySelector(href)) {
-                    e.preventDefault();
-                    document.querySelector(href).scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-
-        // Create floating particles
-        const particlesContainer = document.getElementById('particles');
-        const particleCount = 150;
-        
-        for (let i = 0; i < particleCount; i++) {
-            const particle = document.createElement('div');
-            particle.classList.add('particle');
-            
-            // Random size
-            const sizes = ['small', 'medium', 'large'];
-            const size = sizes[Math.floor(Math.random() * sizes.length)];
-            particle.classList.add(size);
-            
-            // Random position
-            const left = Math.random() * 100;
-           
-            const top = Math.random() * 100;
-            particle.style.left = `${left}%`;
-            particle.style.top = `${top}%`;
-            
-            // Random animation delay
-            const delay = Math.random() * 15;
-            particle.style.animationDelay = `${delay}s`;
-            
-            particlesContainer.appendChild(particle);
-        }
-        
-        // Interactive mouse effect
         document.addEventListener('mousemove', (e) => {
             const x = e.clientX / window.innerWidth;
             const y = e.clientY / window.innerHeight;
